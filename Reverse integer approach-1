@@ -1,0 +1,68 @@
+class Solution {
+public:
+    bool out_of_range(string s,int compare,int sign){
+        int len=s.length()-1;
+        string cmp=to_string(compare);
+        if(sign<0){   
+            for(int i=1;i<cmp.size();i++){
+                if(s[len]>cmp[i]){
+                    return false;
+                }else if(cmp[i]>s[len]){
+                    break;
+                }
+                len--;
+            }
+        }else{
+             for(int i=0;i<cmp.size();i++){
+                if(s[len]>cmp[i]){
+                    return false;
+                }else if(cmp[i]>s[len]){
+                    break;
+                }
+                len--;
+             }
+        }
+        return true;
+    }
+    void rev(string &str){
+        string ans="";
+        for(int i=str.length()-1;i>=0;i--){
+            ans+=str[i];
+        }
+        str=ans;
+    }
+    int reverse(int x) {
+        int original=x;
+        if(x==INT_MIN){
+            return 0;
+        }
+        if(x<0){
+            x=x*-1;
+        }
+        string str=to_string(x);
+        if(str.length()<10){
+            rev(str);
+            if(original<0){
+                return -stoi(str);
+            }
+            return stoi(str);
+        }else{
+            if(original<0){
+                 bool check=out_of_range(str,INT_MIN,-1);
+                 if(check){
+                      rev(str);
+                      return -stoi(str);
+                 }
+                 return 0;
+            }else{
+                 bool check=out_of_range(str,INT_MAX,1);
+                 if(check){
+                    rev(str);
+                    return stoi(str);
+                 }
+                 return 0;
+            }
+        }
+        return 0;
+    }
+};
