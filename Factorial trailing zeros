@@ -1,0 +1,16 @@
+class Solution {
+public:
+    int trailingZeroes(int n) {
+        int i=1;
+        int ans=0;
+        while(true){
+            int number=pow(5,i);
+            ans+=(n/number);
+            if(n/number==0){
+                return ans;
+            }
+            i++;
+        }
+        return ans;
+    }
+};
